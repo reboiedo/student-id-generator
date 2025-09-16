@@ -478,7 +478,7 @@ export default function StaffManager() {
                         onDrop={(e) => handlePhotoDrop(staff.id, e)}
                       >
                         <input
-                          ref={el => photoInputRefs.current[staff.id] = el}
+                          ref={el => { photoInputRefs.current[staff.id] = el; }}
                           type="file"
                           accept="image/*"
                           onChange={(e) => handlePhotoSelect(staff.id, e)}
