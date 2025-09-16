@@ -8,6 +8,7 @@ interface OptimizedAvatarProps {
   size?: number; // Size in pixels (will be used for both width and height)
   className?: string;
   quality?: number; // WebP quality (1-100)
+  refreshKey?: string | number; // Key to force image refresh
 }
 
 export default function OptimizedAvatar({ 
@@ -15,7 +16,8 @@ export default function OptimizedAvatar({
   alt, 
   size = 40, 
   className = "",
-  quality = 80 
+  quality = 80,
+  refreshKey 
 }: OptimizedAvatarProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -29,7 +31,10 @@ export default function OptimizedAvatar({
     // For retina displays, use 2x size
     const retinaSize = size * 2;
     
-    return `/api/proxy-image?url=${encodeURIComponent(originalSrc)}&width=${retinaSize}&height=${retinaSize}&quality=${quality}`;
+    // Add refreshKey as cache buster if provided
+    const cacheParam = refreshKey ? `&cache=${encodeURIComponent(refreshKey)}` : '';
+    
+    return `/api/proxy-image?url=${encodeURIComponent(originalSrc)}&width=${retinaSize}&height=${retinaSize}&quality=${quality}${cacheParam}`;
   };
 
   const optimizedSrc = getOptimizedSrc(src);
@@ -73,6 +78,7 @@ export default function OptimizedAvatar({
       <img 
         src={optimizedSrc} 
         alt={alt}
+        key={refreshKey} // Force re-render when refreshKey changes
         className={`object-cover flex-shrink-0 ${isLoading ? 'opacity-0 absolute inset-0' : 'opacity-100'} ${className}`}
         style={{ width: size, height: size }}
         onLoad={handleLoad}

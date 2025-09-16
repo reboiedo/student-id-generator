@@ -113,6 +113,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "white",
     textAlign: "left",
+    lineHeight: 1.3,
+    width: "60%",
+    flexWrap: "nowrap",
   },
   backContent: {
     marginTop: "auto",

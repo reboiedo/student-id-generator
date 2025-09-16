@@ -21,6 +21,8 @@ export default function StudentSelector() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [csvStudentIds, setCsvStudentIds] = useState<Set<string>>(new Set());
   const [csvFilterActive, setCsvFilterActive] = useState(false);
+  const [imageRefreshKeys, setImageRefreshKeys] = useState<{ [studentId: string]: number }>({});
+  const [refreshingImages, setRefreshingImages] = useState<Set<string>>(new Set());
 
   const selectedStudents = useMemo(() => {
     return allStudents.filter(student => selectedStudentIds.has(String(student.id)));
@@ -137,6 +139,26 @@ export default function StudentSelector() {
     setTempSelectedIds(visibleStudentIds);
   };
 
+  const handleRefreshImage = (studentId: string) => {
+    const refreshKey = Date.now();
+    setImageRefreshKeys(prev => ({
+      ...prev,
+      [studentId]: refreshKey
+    }));
+    
+    // Set refreshing state
+    setRefreshingImages(prev => new Set([...prev, studentId]));
+    
+    // Clear refreshing state after a short delay (simulating loading time)
+    setTimeout(() => {
+      setRefreshingImages(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(studentId);
+        return newSet;
+      });
+    }, 1000);
+  };
+
   const handleGenerateCards = async () => {
     if (selectedStudents.length === 0) return;
 
@@ -221,6 +243,9 @@ export default function StudentSelector() {
               isGenerating={isGenerating}
               customExpirationDates={customExpirationDates}
               onExpirationDateChange={handleExpirationDateChange}
+              imageRefreshKeys={imageRefreshKeys}
+              refreshingImages={refreshingImages}
+              onRefreshImage={handleRefreshImage}
             />
           </div>
 
@@ -242,6 +267,9 @@ export default function StudentSelector() {
               onCsvUpload={handleCsvUpload}
               onClearCsv={handleClearCsv}
               csvFilterActive={csvFilterActive}
+              imageRefreshKeys={imageRefreshKeys}
+              refreshingImages={refreshingImages}
+              onRefreshImage={handleRefreshImage}
             />
           </div>
       </div>
