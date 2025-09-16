@@ -13,7 +13,6 @@ import {
   Font,
 } from "@react-pdf/renderer";
 import { Student } from "@/types/student";
-import { convertStudentImageForPDF } from "@/lib/imageUtils";
 
 // Register custom fonts (same as individual card)
 Font.register({
@@ -174,7 +173,7 @@ const BulkStudentIDCards: React.FC<BulkStudentIDCardsProps> = ({ students, image
 
       <View style={styles.photoContainer}>
         {imageDataUrls[String(student.id)] ? (
-          <Image style={styles.photo} src={imageDataUrls[String(student.id)]!} />
+          <Image style={styles.photo} src={imageDataUrls[String(student.id)]!} alt={student.name} />
         ) : (
           <View
             style={{

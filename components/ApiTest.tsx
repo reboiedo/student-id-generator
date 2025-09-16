@@ -7,7 +7,7 @@ interface ApiTestResult {
   success: boolean;
   message: string;
   studentCount?: number;
-  sampleStudent?: any;
+  sampleStudent?: Record<string, unknown>;
 }
 
 export default function ApiTest() {

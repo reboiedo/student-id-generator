@@ -57,7 +57,7 @@ export default function SelectedStudents({
           </div>
         ) : (
           <div className="space-y-0">
-            {students.map((student, index) => (
+            {students.map((student) => (
               <div
                 key={student.id}
                 className="p-3 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors"

@@ -274,7 +274,7 @@ export default function StudentList({
       </div>
       
       <div className="mt-3 text-sm text-gray-700 text-center">
-        Use checkboxes to select multiple students, then click "Add Selected" or click individual "Add" buttons
+        Use checkboxes to select multiple students, then click &quot;Add Selected&quot; or click individual &quot;Add&quot; buttons
       </div>
     </div>
   );

@@ -66,9 +66,9 @@ class ApiClient {
       } else if (Array.isArray(response.data)) {
         students = response.data;
       } else if (response && typeof response === 'object' && 'users' in response) {
-        students = (response as any).users;
+        students = (response as { users: ApiStudentResponse[] }).users;
       } else if (response && typeof response === 'object' && 'students' in response) {
-        students = (response as any).students;
+        students = (response as { students: ApiStudentResponse[] }).students;
       } else {
         console.error('Unexpected API response structure:', response);
         throw new Error('Unexpected API response structure');

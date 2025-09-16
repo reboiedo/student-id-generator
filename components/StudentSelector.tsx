@@ -3,7 +3,6 @@
 import { useState, useMemo } from "react";
 import { pdf } from "@react-pdf/renderer";
 import { saveAs } from "file-saver";
-import { Student } from "@/types/student";
 import { useStudents } from "@/hooks/useStudents";
 import StudentList from "./StudentList";
 import SelectedStudents from "./SelectedStudents";
