@@ -85,9 +85,9 @@ export async function GET(request: NextRequest) {
         }
 
         // Convert to WebP for better compression and set quality
-        processedBuffer = await sharpInstance
+        processedBuffer = Buffer.from(await sharpInstance
           .webp({ quality: qualityNum })
-          .toBuffer();
+          .toBuffer());
 
         contentType = 'image/webp';
         console.log('Image resized successfully, new size:', processedBuffer.length);
