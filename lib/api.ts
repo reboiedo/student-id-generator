@@ -26,7 +26,8 @@ class ApiClient {
     this.baseUrl = process.env.NEXT_PUBLIC_API_URL || '';
     this.token = process.env.NEXT_PUBLIC_API_TOKEN || '';
     
-    if (!this.baseUrl || !this.token) {
+    // Only throw error if we're in browser and trying to make actual requests
+    if (typeof window !== 'undefined' && (!this.baseUrl || !this.token)) {
       throw new Error('API configuration missing. Please check environment variables.');
     }
   }
