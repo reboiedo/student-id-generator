@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { apiClient } from "@/lib/api";
+import { Student } from "@/types/student";
 
 interface ApiTestResult {
   success: boolean;
   message: string;
   studentCount?: number;
-  sampleStudent?: Record<string, unknown>;
+  sampleStudent?: Student | null;
 }
 
 export default function ApiTest() {
