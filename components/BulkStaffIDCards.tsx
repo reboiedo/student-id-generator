@@ -180,7 +180,7 @@ const BulkStaffIDCards: React.FC<BulkStaffIDCardsProps> = ({ staffList, imageDat
 
             <View style={styles.photoContainer}>
               {imageDataUrls[staff.id] ? (
-                <Image style={styles.photo} src={imageDataUrls[staff.id]!} alt="" />
+                <Image style={styles.photo} src={imageDataUrls[staff.id]!} />
               ) : (
                 <View
                   style={{

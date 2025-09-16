@@ -173,7 +173,7 @@ const BulkStudentIDCards: React.FC<BulkStudentIDCardsProps> = ({ students, image
 
       <View style={styles.photoContainer}>
         {imageDataUrls[String(student.id)] ? (
-          <Image style={styles.photo} src={imageDataUrls[String(student.id)]!} alt={student.name} />
+          <Image style={styles.photo} src={imageDataUrls[String(student.id)]!} />
         ) : (
           <View
             style={{
